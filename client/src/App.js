@@ -1,42 +1,67 @@
 import React from 'react';
+import Home from './components/Home';
+import Shop from './components/Shop';
+import Basket from './components/Basket';
+import Inventory from './components/Inventory';
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Link
+} from "react-router-dom";
 import './App.css';
-
-const API_URL = "http://www.omdbapi.com/?apikey=2d9169e9&t=moonstruck";
 
 class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      object: null
+      stock: Inventory,
+      view: 'Shop'
     };
   }
 
-  componentDidMount() {
-    let options = {
-      "method": "GET"
-    };
-    fetch(API_URL, options)
-      .then(res => res.json())
-      .then(json => {
-        // upon success, update tasks
-        arr.push(json);
-        this.setState({ object: json });
-      })
-      .catch(error => {
-        console.log("ERROR in componentDidMount():", error);
-      });
+  changeView(selectedView) {
+    this.setState({ view: selectedView });
+    console.log(this.state.view);
   }
 
   render() {
 
-    console.log(arr[0]);
     return (
       <div className="App">
-        <h1>Here is the app</h1>
+          <Router>
+            <nav>
+              <div className="nav-grid">
+                <h1>Goof Crü</h1>
+                <div>
+                  <Link to="/" className="link">Home</Link> /&nbsp;
+                  <Link to="/shop" className="link">Shop</Link> /&nbsp;
+                  About /&nbsp;
+                  <Link to="/basket" className="link">Basket</Link>
+                  {/* <span onClick={() => this.changeView('Basket')}>Basket</span> */}
+                </div>
+              </div>
+            </nav>
+            <img src="/images/hero.jpg" alt="skateboarder in Dubrovnik" className="hero"/>
+            <Switch>
+              <Route exact path="/">
+                <Home/>
+              </Route>
+              <Route path="/shop">
+                <Shop stock={this.state.stock}/>
+              </Route>
+              <Route path="/basket">
+                <Basket/>
+              </Route>
+            </Switch>
+          </Router>
+          <hr/>
+          <div className="footer">
+            © GOOF CRÜ 2020
+          </div>
       </div>
     );
   }
-
 }
 
 export default App;

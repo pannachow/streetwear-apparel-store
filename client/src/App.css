@@ -1,3 +1,54 @@
+body {
+  font-family: 'Didact Gothic', sans-serif;
+  font-size: medium;
+}
+
+h1, h2, h3 {
+  font-family: 'Raleway', sans-serif;
+}
+
 .App {
   text-align: center;
+}
+
+.App h1 {
+  font-size: xx-large;
+  margin: 20px 0;
+}
+
+.App nav {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  max-height: 80px;
+  background-color: white; opacity: 0.9;
+}
+
+.nav-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: center;
+}
+
+.link {
+  text-decoration: none;
+  font-weight: bold;
+  color: black;
+}
+
+a:hover {
+  color: lightcoral;
+}
+
+.hero {
+  max-width: 100%;
+}
+
+hr {
+  max-width: 1200px;
+}
+
+.footer {
+  margin-top: 10px;
+  margin-bottom: 40px;
 }

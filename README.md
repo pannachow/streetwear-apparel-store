@@ -6,8 +6,10 @@ A simple online shop interface for an independent apparel brand
 * Gives detail on individual items on hover/click (price/description/size)
 * Allows user to add item(s) to cart
 * Allows users to remove item(s) from cart
+* Saves items added to cart, even on page reload? (Desired)
 
 ### Feature expansion
+* Backend database
 * Create user account to save personal details
 * Assign order history to user account
 * Checkout process?
@@ -24,16 +26,16 @@ A simple online shop interface for an independent apparel brand
 * About page (text only)
 * Design for web & for mobile view
 
-
-### Database schema
-![Database schema](images/schema.jpg)
-* 2x tables; 1x for stock, 1x for storing quantities of stock by size
-** Is another table needed for cart? Not sure how to map the hierarchy of this **
-
-### API routes
-* GET api/stock : returns all inventory objects
-* GET api/stock/:id : returns item by ID number (when clicking on image in shop)
-** Do I need to create post/delete routes linked to a cart table? **
+### Data
+* Stored initially as array of objects in separate JS file
+* Stock item to include:
+- ID number
+- name/title
+- description?
+- price
+- colour
+- size(s)
+- image link
 
 ### To do
 [] Create & populate shop database
@@ -41,4 +43,14 @@ A simple online shop interface for an independent apparel brand
 [] Create & test routes on Postman
 [] Develop front end shop page & display all items & relevent properties
 [] Prep & import assets
+
+## Backend not being implemented at this stage, though may try to introduce later
+
+### Database schema
+![Database schema](images/schema.jpg)
+* 2x tables; 1x for stock, 1x for storing quantities of stock by size
+
+### API routes
+* GET api/stock : returns all inventory objects
+* GET api/stock/:id : returns item by ID number (when clicking on image in shop)
 
