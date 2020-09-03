@@ -16,13 +16,36 @@ class App extends React.Component {
     super(props);
     this.state = {
       stock: Inventory,
-      view: 'Shop'
+      basket: []
+      // view: 'Shop'
     };
   }
 
   changeView(selectedView) {
     this.setState({ view: selectedView });
     console.log(this.state.view);
+  }
+
+  addToBasket(item) {
+    if (this.state.basket.includes(item)) {
+      item['quantity']++;
+    } else {
+      this.setState({basket: [...this.state.basket, item]});
+      // console.log('Basket now contains:', this.state.basket);
+    }
+  }
+
+  removeFromBasket(selectedItem) {
+    let itemIndex = this.state.basket.findIndex (item => item.id === selectedItem.id);
+    let updatedBasket = [...this.state.basket];
+    let removedItem = this.state.basket[itemIndex];
+    if (removedItem['quantity'] > 1) {
+      removedItem['quantity']--;
+      updatedBasket.splice(itemIndex, 1, removedItem)
+    } else {
+      updatedBasket.splice(itemIndex, 1);
+    }
+    this.setState({basket: updatedBasket});
   }
 
   render() {
@@ -48,10 +71,10 @@ class App extends React.Component {
                 <Home/>
               </Route>
               <Route path="/shop">
-                <Shop stock={this.state.stock}/>
+                <Shop stock={this.state.stock} addToBasket={item => this.addToBasket(item)}/>
               </Route>
               <Route path="/basket">
-                <Basket/>
+                <Basket items={this.state.basket} removeFromBasket={item => this.removeFromBasket(item)}/>
               </Route>
             </Switch>
           </Router>

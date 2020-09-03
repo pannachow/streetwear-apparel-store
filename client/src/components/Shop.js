@@ -3,19 +3,11 @@ import Item from './Item';
 import './Shop.css';
 
 class Shop extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      basketItems: []
-    };
-  }
 
   onClick(id) {
-    // console.log('Product:', id);
-    // console.log(this.state.basketItems);
-    let newItem = this.props.stock.find((item) => item.id === id);
-    this.setState({basketItems: [...this.state.basketItems, newItem]});
-    // need to pass this up to app so it can pass down to basket!!!
+    let selectedItem = this.props.stock.find((item) => item.id === id);
+    selectedItem['quantity'] = 1;
+    this.props.addToBasket(selectedItem);
   }
 
   render() {
