@@ -1,0 +1,13 @@
+.About {
+  max-width: 1200px;
+  margin: 20px auto;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat( auto-fit, minmax(250px, 1fr) );
+  grid-auto-rows: auto;
+  row-gap: 20px;
+  column-gap: 20px;
+  margin: 20px;
+}

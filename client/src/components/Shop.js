@@ -3,41 +3,68 @@ import Item from './Item';
 import './Shop.css';
 
 class Shop extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      showAllItems: true,
+      selectedItem: null
+    };
+  }
 
-  onClick(id) {
+  imgClick(id) {
+    let clickedItem = this.props.stock.find((item) => item.id === id);
+    this.setState({
+      selectedItem: clickedItem,
+      showAllItems: false
+    });
+  }
+  
+  addItem(id) {
     let selectedItem = this.props.stock.find((item) => item.id === id);
     selectedItem['quantity'] = 1;
     this.props.addToBasket(selectedItem);
+  }
+
+  updateState() {
+    this.setState({showAllItems: true});
   }
 
   render() {
 
     let items = this.props.stock.map((item) => (
       <div key={item.id}>
-        <img src={item.imgUrl} alt={item.title}/>
+        <img src={item.imgUrl} alt={item.title} onClick={(e) => this.imgClick(item.id)}/>
         <ul>
           <li>{item.name}</li>
           <li>£{item.price}</li>
           <li>{item.colour}</li>
         </ul>
-        {/* Need to work this through; ideally, if no size, no select is generated; if size exists, render options with specified sizes in item.size */}
-        <select>
+        {/* Not sure how to conditionally render this select menu; only if size exists should size selector be shown*/}
+        {/* <select>
           <option value="small">Small</option>
           <option value="medium">Medium</option>
           <option value="large">Large</option>
-        </select>
-        <br/>
-        <button onClick={(e) => this.onClick(item.id)}>Add to basket</button>
+        </select> */}
+        <button onClick={(e) => this.addItem(item.id)}>Add to basket</button>
       </div>
     ));
 
     return (
       <div className="Shop">
         <h3>PRODUCTS</h3>
-        <div className="items">
-          {items}
-        </div>
-        <Item/>
+        <hr/>
+        {
+          this.state.showAllItems
+          ?
+            <div className="items">
+              {items}
+            </div>
+          : <Item
+              showItem={this.state.selectedItem}
+              updateState={(e) => this.updateState()}
+              addItem={(id) => this.addItem(id)}
+            />
+        }
       </div>
     );
   }

@@ -15,6 +15,11 @@
 .items img {
   width: 100%;
   object-fit: contain;
+  cursor: pointer;
+}
+
+.items img:hover {
+  outline: solid 5px cornflowerblue;
 }
 
 ul {
@@ -31,8 +36,16 @@ select {
 }
 
 button {
-  width: 100px;
-  padding: 5px;
+  width: 120px;
+  padding: 10px;
   margin: 10px auto;
   font-family: 'Didact Gothic', sans-serif;
+  font-size: 1em;
+  border: 0;
+  transition-duration: 0.4s;
+}
+
+button:hover {
+  background-color: cornflowerblue;
+  color: white;
 }
