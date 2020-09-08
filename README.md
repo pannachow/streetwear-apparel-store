@@ -1,29 +1,31 @@
 # mvp-project-1
-A simple online shop interface for an independent apparel brand
+A simple online shop interface for an independent streetwear apparel brand
 
 ## What the app does
 * Shows all items
-* Gives detail on individual items on hover/click (price/description/size)
+* Gives detail on individual items on hover/click (price/description/colour)
 * Allows user to add item(s) to cart
 * Allows users to remove item(s) from cart
-* Saves items added to cart, even on page reload? (Desired)
 
 ### Feature expansion
-* Backend database
+* Add product image to basket view
+* Allow users to save items to cart to retrieve later
+* Store inventory on back end database
 * Create user account to save personal details
 * Assign order history to user account
-* Checkout process?
+* Drop-down select menu for items to select size and/or quantity
 * Client interface to add/remove/update items
 * Larger amount of inventory should include some method of filtering products (i.e. t-shirts/hats/etc.)
+* Submit form to go to a nominated email address?
 
 ### Userflow
 ![Sitemap](images/sitemap.jpg)
 * Nav bar on top of screen (shop/cart/about)
 * Shop page displays all items (likely 8 max)
-* On clicking an item, window will open with larger image, product name, description, price, size selector(?), 'add to cart' button + close window
-* Cart page shows items already in cart, or 'empty'
-* Cart page should allow deletion of items
-* About page (text only)
+* On clicking an item, dedicated page will show product name, description, price, size selector(?), 'add to basket' button + back to shop
+* Basket page shows items already in cart, or 'empty'
+* Basket page should allow deletion of items
+* About page with contact form
 * Design for web & for mobile view
 
 ### Data
@@ -31,18 +33,11 @@ A simple online shop interface for an independent apparel brand
 * Stock item to include:
 - ID number
 - name/title
-- description?
+- description
 - price
 - colour
 - size(s)
 - image link
-
-### To do
-[] Create & populate shop database
-[] Set up server
-[] Create & test routes on Postman
-[] Develop front end shop page & display all items & relevent properties
-[] Prep & import assets
 
 ## Backend not being implemented at this stage, though may try to introduce later
 
@@ -50,7 +45,7 @@ A simple online shop interface for an independent apparel brand
 ![Database schema](images/schema.jpg)
 * 2x tables; 1x for stock, 1x for storing quantities of stock by size
 
-### API routes
+### API routes (Not yet applicable)
 * GET api/stock : returns all inventory objects
 * GET api/stock/:id : returns item by ID number (when clicking on image in shop)
 

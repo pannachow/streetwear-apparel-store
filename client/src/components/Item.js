@@ -23,7 +23,13 @@ class Item extends React.Component {
             <p>{this.props.showItem.description}</p>
             <p>£{this.props.showItem.price}</p>
             <p>Colour: {this.props.showItem.colour}</p>
-            <button onClick={(e) => this.props.addItem(this.props.showItem.id)}>Add to basket</button>
+            <button 
+              onClick={(e) => this.props.addItem(this.props.showItem.id)} 
+              className={!this.props.showItem.added ? "" : "active"}
+              title={!this.props.showItem.added ? "" : "Click to reset button"}
+              >
+                {!this.props.showItem.added ? "Add to basket" : "Item added!"}
+            </button>
             <p><span style={{fontSize: "1.8em"}}>&#8630;</span> <span className="link" onClick={(e) => this.onClick()}>Back to shop</span></p>
           </div>
         </div>

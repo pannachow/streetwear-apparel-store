@@ -19,7 +19,7 @@ class BasketView extends React.Component {
     let itemsJsx = this.props.items.map((item) => (
         <tr key={item.id}>
             <td>{item.name}</td>
-            <td>{item.price}</td>
+            <td>£{item.price}</td>
             <td>{item.colour}</td>
             <td>{item.quantity}</td>
             <td>£{item.quantity*item.price}</td>

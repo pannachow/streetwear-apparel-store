@@ -21,12 +21,11 @@ body {
   top: 0;
   width: 100%;
   max-height: 80px;
-  /* background-color: white; opacity: 0.9; */
   background-color: white;
 }
 
 .goof {
-  color: cornflowerblue;
+  color: #00bbff;
 }
 
 .nav-grid {
@@ -46,7 +45,7 @@ body {
 }
 
 a:hover {
-  color: cornflowerblue;
+  color: #d61818;
   text-decoration: underline;
 }
 

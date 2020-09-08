@@ -1,0 +1,57 @@
+.Shop {
+  max-width: 1200px;
+  margin: 20px auto;
+}
+
+.items {
+  display: grid;
+  grid-template-columns: repeat( auto-fit, minmax(250px, 1fr) );
+  grid-auto-rows: auto;
+  row-gap: 20px;
+  column-gap: 20px;
+  margin: 20px;
+}
+
+.items img {
+  width: 100%;
+  object-fit: contain;
+  cursor: pointer;
+  margin-bottom: 10px;
+}
+
+.items img:hover {
+  outline: solid 5px #00bbff;
+}
+
+ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+
+select {
+  width: 100px;
+  padding: 2px;
+  margin-top: 5px;
+  font-family: 'Didact Gothic', sans-serif;
+}
+
+button {
+  width: 120px;
+  padding: 10px;
+  margin: 10px auto;
+  font-family: 'Didact Gothic', sans-serif;
+  font-size: 1em;
+  border: 0;
+  transition-duration: 0.4s;
+}
+
+button:hover {
+  background-color: #00bbff;
+  color: white;
+}
+
+.Shop .active {
+  background-color: #00bbff;
+  color: white;
+}

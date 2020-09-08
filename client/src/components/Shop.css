@@ -16,10 +16,11 @@
   width: 100%;
   object-fit: contain;
   cursor: pointer;
+  margin-bottom: 10px;
 }
 
 .items img:hover {
-  outline: solid 5px cornflowerblue;
+  outline: solid 5px #00bbff;
 }
 
 ul {
@@ -46,6 +47,11 @@ button {
 }
 
 button:hover {
-  background-color: cornflowerblue;
+  background-color: #00bbff;
+  color: white;
+}
+
+.Shop .active {
+  background-color: #00bbff;
   color: white;
 }

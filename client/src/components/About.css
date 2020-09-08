@@ -3,11 +3,47 @@
   margin: 20px auto;
 }
 
-.grid {
+.About .grid {
   display: grid;
   grid-template-columns: repeat( auto-fit, minmax(250px, 1fr) );
   grid-auto-rows: auto;
   row-gap: 20px;
   column-gap: 20px;
   margin: 20px;
+}
+
+.About IMG {
+  width: 100%;
+  object-fit: contain;
+}
+
+.About .grid H3 {
+  font-style: italic;
+  color: #00bbff;
+}
+
+.About FORM {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+}
+
+.About INPUT {
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.message {
+  grid-column-start: 1;
+  grid-column-end: 3;
+  width: 100%;
+}
+
+TEXTAREA {
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.About .active {
+  background-color: #00bbff;
+  color: white;
 }

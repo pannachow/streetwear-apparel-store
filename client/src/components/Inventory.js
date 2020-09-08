@@ -2,47 +2,52 @@ export default [
   {
     id: 1,
     imgUrl: '/images/product1.jpg',
-    name: 'Classic logo shirt',
-    colour: 'white',
+    name: 'Disc logo shirt',
+    colour: 'peaches and cream',
     price: 25,
-    description: "Unisex oversized t-shirt featuring hand screenprinted logo on the front, and a large logo print on the back.",
-    size: true
+    description: "Unisex oversized t-shirt featuring hand screenprinted logo on the front, and a large illustration on the back.",
+    size: true,
+    added: false
   },
   {
     id: 2,
     imgUrl: '/images/product2.jpg',
     name: 'Fitted logo shirt',
-    colour: 'cream',
+    colour: 'white, red and blue',
     price: 22,
-    description: "Fitted t-shirt featuring hand screenprinted logo on the front, and a large logo print on the back.",
-    size: true
+    description: "Fitted t-shirt featuring hand screenprinted logo on the front, and a large illustration on the back.",
+    size: true,
+    added: false
   },
   {
     id: 3,
     imgUrl: '/images/product3.jpg',
-    name: 'Big logo sweatshirt',
-    colour: 'grey',
+    name: 'Small disc logo sweatshirt',
+    colour: 'grey and peach',
     price: 38,
-    description: "Limited edition ring-spun sustainable cotton sweatshirt with large hand embroidered logo. One size fits all.",
-    size: false
+    description: "Limited edition ring-spun sustainable cotton sweatshirt with small hand embroidered logo. One size fits all.",
+    size: false,
+    added: false
   },
   {
     id: 4,
     imgUrl: '/images/product4.jpg',
     name: 'Original logo sweatshirt',
-    colour: 'coffee',
+    colour: 'white, red and blue',
     price: 35,
-    description: "Sustainable ring-spun cotton sweatshirt with small hand embroidered logo. Standard fit.",
-    size: false
+    description: "Sustainable ring-spun cotton sweatshirt with hand screenprinted logo on the front and text print on the back. Standard fit.",
+    size: false,
+    added: false
   },
   {
     id: 5,
     imgUrl: '/images/product5.jpg',
-    name: 'Classic logo trucker hat',
+    name: 'Original logo cap',
     colour: 'black',
     price: 20,
-    description: "Trucker-style cap with hand embroidered logo. One size fits all.",
-    size: true
+    description: "5-panel cap with hand embroidered logo. One size fits all.",
+    size: true,
+    added: false
   },
   {
     id: 6,
@@ -51,7 +56,8 @@ export default [
     colour: 'multicolour',
     price: 10,
     description: "Hand screenprinted logo on sustainable cotton tote bag.",
-    size: true
+    size: true,
+    added: false
   },
   {
     id: 7,
@@ -60,7 +66,8 @@ export default [
     colour: 'cream',
     price: 8,
     description: "Sustainable cotton face mask with hand screen printed logo. Machine washable.",
-    size: false
+    size: false,
+    added: false
   },
   {
     id: 8,
@@ -69,6 +76,7 @@ export default [
     colour: 'black',
     price: 7,
     description: "Goof Crü zine premier issue. Limited run of 100 copies. Hand-bound and risograph printed.",
-    size: false
+    size: false,
+    added: false
   }
 ];

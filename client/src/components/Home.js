@@ -6,7 +6,7 @@ class Home extends React.Component {
 
     return (
       <div className="Home">
-        <h3>Home</h3>
+        <h2 style={{color: "#00bbff", fontStyle: "italic"}}>"Skate culture for the many and the few."</h2>
       </div>
     );
   }

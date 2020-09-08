@@ -24,7 +24,21 @@ class App extends React.Component {
     };
   }
 
+  itemAdded(item) {
+    let updatedStock = this.state.stock;
+    let itemIndex = updatedStock.findIndex ((i) => i.id === item.id);
+    updatedStock[itemIndex]['added'] = !updatedStock[itemIndex]['added'];
+    this.setState({stock: updatedStock});
+  }
+
   addToBasket(item) {
+    if (item['added']) {
+      this.itemAdded(item);
+      return;
+    }
+    if (!item['added']) {
+      this.itemAdded(item);
+    }
     if (this.state.orderPlaced) {
       this.setState({orderPlaced: false});
     }
@@ -51,6 +65,9 @@ class App extends React.Component {
   }
 
   removeFromBasket(selectedItem) {
+    if (selectedItem['added']) {
+      this.itemAdded(selectedItem);
+    }
     let itemIndex = this.state.basket.findIndex (item => item.id === selectedItem.id);
     let updatedBasket = [...this.state.basket];
     let removedItem = this.state.basket[itemIndex];

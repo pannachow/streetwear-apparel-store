@@ -45,7 +45,14 @@ class Shop extends React.Component {
           <option value="medium">Medium</option>
           <option value="large">Large</option>
         </select> */}
-        <button onClick={(e) => this.addItem(item.id)}>Add to basket</button>
+        {/* <button onClick={(e) => this.addItem(item.id)}>Add to basket</button> */}
+        <button
+          onClick={(e) => this.addItem(item.id)}
+          className={!item.added ? "" : "active"}
+          title={!item.added ? "" : "Click to reset button"}
+          >
+            {!item.added ? "Add to basket" : "Item added!"}
+          </button>
       </div>
     ));
 
