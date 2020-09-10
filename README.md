@@ -1,6 +1,9 @@
 # mvp-project-1
 A simple online shop interface for an independent streetwear apparel brand
 
+## How to:
+To run the app on browser, from the main project directory, cd into client and npm start
+
 ## What the app does
 * Shows all items
 * Gives detail on individual items on hover/click (price/description/colour)

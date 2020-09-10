@@ -17,12 +17,14 @@ class Basket extends React.Component {
         <hr/>
         {
           this.props.items.length > 0
+          // if there are items in basket, show the basket
           ? <BasketView
               items={this.props.items}
               total={this.props.total}
               onClick={(id) => this.onClick(id)}
               clearBasket={(e) => this.props.clearBasket()}
             />
+          // if there are no items in basket show empty basket component (see below)
           : <EmptyBasket status={this.props.orderStatus}/>
         }
       </div>

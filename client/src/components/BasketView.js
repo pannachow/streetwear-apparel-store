@@ -10,6 +10,7 @@ class BasketView extends React.Component {
     };
   }
 
+  // toggles view for this component, depending on whether checkout has already taken place or not
   checkOut() {
     this.setState({checkOut: true});
   }

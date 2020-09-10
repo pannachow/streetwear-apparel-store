@@ -22,6 +22,7 @@ class About extends React.Component {
 
   handleSubmit(event) {
       event.preventDefault();
+      // currently this method only console.logs the submitted message
       console.log('Submitted:', this.state);
       this.setState({
           name: '',

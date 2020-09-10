@@ -13,6 +13,7 @@ class CheckOut extends React.Component {
           country: '',
           postcode: '',
           items: this.props.items,
+          // total + 5 for postage
           total: this.props.total + 5
         };
       }

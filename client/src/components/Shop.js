@@ -45,7 +45,6 @@ class Shop extends React.Component {
           <option value="medium">Medium</option>
           <option value="large">Large</option>
         </select> */}
-        {/* <button onClick={(e) => this.addItem(item.id)}>Add to basket</button> */}
         <button
           onClick={(e) => this.addItem(item.id)}
           className={!item.added ? "" : "active"}
@@ -60,6 +59,7 @@ class Shop extends React.Component {
       <div className="Shop">
         <h3>PRODUCTS</h3>
         <hr/>
+        {/* shop toggles between showing all items or a selected item */}
         {
           this.state.showAllItems
           ?

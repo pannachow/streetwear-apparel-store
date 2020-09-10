@@ -24,6 +24,10 @@ class App extends React.Component {
     };
   }
 
+  // METHODS
+
+  //itemAdded method is how the 'add to basket' button state is toggled in shop and item view
+  //it searches the existing stock array to update the selected item's 'added' true/false value
   itemAdded(item) {
     let updatedStock = this.state.stock;
     let itemIndex = updatedStock.findIndex ((i) => i.id === item.id);
@@ -31,30 +35,36 @@ class App extends React.Component {
     this.setState({stock: updatedStock});
   }
 
+  //addToBasket method called in shop and item view
   addToBasket(item) {
+    // first checks to toggle the 'add to basket' button text
     if (item['added']) {
       this.itemAdded(item);
       return;
+      // this returns and exits the method; essentially returning the button to default value if clicked on twice
     }
     if (!item['added']) {
+      // if item's added property is false, change it true, updates button text to 'item added!'
       this.itemAdded(item);
     }
+    // resets basket view message, if order has already been placed
     if (this.state.orderPlaced) {
       this.setState({orderPlaced: false});
     }
+    // updates current basket total
     let sum = this.state.total;
     sum += item['price'];
+    // updates current basket quantity
     let itemCount = this.state.basketItems;
     itemCount++;
-    if (this.state.basket.length === 0) {
-      this.setState({viewBasket: true});
-    }
+    // if basket already includes the item, update total & quantity
     if (this.state.basket.includes(item)) {
       item['quantity']++;
       this.setState({
         total: sum,
         basketItems: itemCount
       });
+    // if item not in basket, add item, update total & quantity
     } else {
       this.setState({
         basket: [...this.state.basket, item],
@@ -64,7 +74,9 @@ class App extends React.Component {
     }
   }
 
+  // removeFromBasket called in basketView
   removeFromBasket(selectedItem) {
+    // first checks to toggle the 'add to basket' button text
     if (selectedItem['added']) {
       this.itemAdded(selectedItem);
     }
@@ -72,17 +84,18 @@ class App extends React.Component {
     let updatedBasket = [...this.state.basket];
     let removedItem = this.state.basket[itemIndex];
     let sum = this.state.total;
+    // updates current basket quantity
     let itemCount = this.state.basketItems;
     itemCount--;
+    // updates current basket total
     sum -= removedItem['price'];
+    // if there is more than 1 of the same item in basket, reduce quantity of that item by 1
     if (removedItem['quantity'] > 1) {
       removedItem['quantity']--;
       updatedBasket.splice(itemIndex, 1, removedItem)
     } else {
+      // if only 1 of the item in cart, delete it and update basket
       updatedBasket.splice(itemIndex, 1);
-    }
-    if (updatedBasket.length === 0) {
-      this.setState({viewBasket: false});
     }
     this.setState({
       basket: updatedBasket,
@@ -91,6 +104,7 @@ class App extends React.Component {
     });
   }
 
+  // clearBasket method called in checkOut view
   clearBasket() {
     this.setState({
       basket: [],
@@ -140,7 +154,6 @@ class App extends React.Component {
                   items={this.state.basket}
                   removeFromBasket={item => this.removeFromBasket(item)}
                   clearBasket={(e) => this.clearBasket()}
-                  showBasket={this.state.showBasket}
                   total={this.state.total}
                   orderStatus={this.state.orderPlaced}
                 />

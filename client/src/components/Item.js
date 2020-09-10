@@ -3,6 +3,7 @@ import './Item.css';
 
 class Item extends React.Component {
 
+  // toggles view between shop and item
   onClick() {
     this.props.updateState();
   }
