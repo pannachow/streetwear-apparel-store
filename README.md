@@ -51,4 +51,3 @@ To run the app on browser, from the main project directory, cd into client and n
 ### API routes (Not yet applicable)
 * GET api/stock : returns all inventory objects
 * GET api/stock/:id : returns item by ID number (when clicking on image in shop)
-
