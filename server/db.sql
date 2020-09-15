@@ -1,26 +1,26 @@
-CREATE SCHEMA `shop`;
+CREATE SCHEMA shop;
 
-CREATE TABLE `shop`.`product` (
-  `id` INT NOT NULL,
-  `name` VARCHAR(100) NOT NULL,
-  `description` VARCHAR(2000) NOT NULL,
-  `price` DECIMAL(13,2) NOT NULL,
-  `color` VARCHAR(100) NOT NULL,
-  `image` VARCHAR(100) NOT NULL,
-  PRIMARY KEY (`id`));
+CREATE TABLE shop.product (
+  id INT NOT NULL,
+  name VARCHAR(100) NOT NULL,
+  description VARCHAR(2000) NOT NULL,
+  price DECIMAL(13,2) NOT NULL,
+  color VARCHAR(100) NOT NULL,
+  image VARCHAR(100) NOT NULL,
+  PRIMARY KEY (id));
 
-CREATE TABLE `shop`.`basket` (
-  `user` INT NOT NULL,
-  `product` INT NOT NULL,
-  PRIMARY KEY (`user`, `product`),
-  INDEX `product_idx` (`product` ASC) VISIBLE,
-  CONSTRAINT `product`
-    FOREIGN KEY (`product`)
-    REFERENCES `shop`.`product` (`id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION);
+-- CREATE TABLE shop.basket (
+--   user INT NOT NULL,
+--   product INT NOT NULL,
+--   PRIMARY KEY (user, product),
+--   INDEX product_idx (product ASC) VISIBLE,
+--   CONSTRAINT product
+--     FOREIGN KEY (product)
+--     REFERENCES shop.product (id)
+--     ON DELETE NO ACTION
+--     ON UPDATE NO ACTION);
 
-INSERT INTO `shop`.`product` (
+INSERT INTO shop.product (
     id,
     name,
     description,
