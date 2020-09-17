@@ -1,15 +1,13 @@
-CREATE SCHEMA shop;
-
-CREATE TABLE shop.product (
+CREATE TABLE product (
   id INT NOT NULL,
   name VARCHAR(100) NOT NULL,
   description VARCHAR(2000) NOT NULL,
-  price DECIMAL(13,2) NOT NULL,
+  price DOUBLE NOT NULL,
   color VARCHAR(100) NOT NULL,
   image VARCHAR(100) NOT NULL,
   PRIMARY KEY (id));
 
--- CREATE TABLE shop.basket (
+-- CREATE TABLE basket (
 --   user INT NOT NULL,
 --   product INT NOT NULL,
 --   PRIMARY KEY (user, product),
@@ -20,7 +18,7 @@ CREATE TABLE shop.product (
 --     ON DELETE NO ACTION
 --     ON UPDATE NO ACTION);
 
-INSERT INTO shop.product (
+INSERT INTO product (
     id,
     name,
     description,

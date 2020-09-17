@@ -16,13 +16,13 @@ class Item extends React.Component {
           <img
             id={this.props.showItem.id}
             className="mainImage"
-            src={this.props.showItem.imgUrl}
+            src={this.props.showItem.image}
             alt={this.props.showItem.name}
           />
           <div className="text">
             <h3>{this.props.showItem.name}</h3>
             <p>{this.props.showItem.description}</p>
-            <p>£{this.props.showItem.price}</p>
+            <p>£{this.props.showItem.price.toFixed(2)}</p>
             <p>Colour: {this.props.showItem.colour}</p>
             <button 
               onClick={(e) => this.props.addItem(this.props.showItem.id)} 

@@ -3,7 +3,6 @@ import Home from './components/Home';
 import Shop from './components/Shop';
 import About from './components/About';
 import Basket from './components/Basket';
-import Inventory from './components/Inventory';
 import {
   BrowserRouter as Router,
   Switch,
@@ -16,12 +15,21 @@ class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      stock: Inventory,
+      stock: [],
       basket: [],
       basketItems: 0,
       total: 0,
       orderPlaced: false
     };
+  }
+  async componentDidMount() {
+    try {
+      const res = await fetch("http://localhost:3001/product");
+      const products = await res.json();
+      this.setState({ stock: products });
+    } catch (error) {
+      console.log("ERROR in componentDidMount():", error);
+    }
   }
 
   // METHODS

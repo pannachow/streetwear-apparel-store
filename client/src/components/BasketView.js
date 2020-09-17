@@ -20,10 +20,10 @@ class BasketView extends React.Component {
     let itemsJsx = this.props.items.map((item) => (
         <tr key={item.id}>
             <td>{item.name}</td>
-            <td>£{item.price}</td>
+            <td>£{item.price.toFixed(2)}</td>
             <td>{item.colour}</td>
             <td>{item.quantity}</td>
-            <td>£{item.quantity*item.price}</td>
+            <td>£{(item.quantity * item.price).toFixed(2)}</td>
             <td>
                 <button onClick={(e) => this.props.onClick(item.id)}>Delete</button>
             </td>
@@ -54,7 +54,7 @@ class BasketView extends React.Component {
                       <td></td>
                       <td></td>
                       <td></td>
-                      <td className="total"><p>£{this.props.total}</p></td>
+                      <td className="total"><p>£{this.props.total.toFixed(2)}</p></td>
                       <td><button onClick={(e) => this.checkOut()}>CHECK OUT</button></td>
                   </tr>
                 </tbody>

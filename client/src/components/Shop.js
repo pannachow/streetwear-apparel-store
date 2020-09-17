@@ -33,10 +33,10 @@ class Shop extends React.Component {
 
     let items = this.props.stock.map((item) => (
       <div key={item.id}>
-        <img src={item.imgUrl} alt={item.title} onClick={(e) => this.imgClick(item.id)}/>
+        <img src={item.image} alt={item.title} onClick={(e) => this.imgClick(item.id)}/>
         <ul>
           <li>{item.name}</li>
-          <li>£{item.price}</li>
+          <li>£{item.price.toFixed(2)}</li>
           <li>{item.colour}</li>
         </ul>
         {/* Not sure how to conditionally render this select menu; only if size exists should size selector be shown*/}

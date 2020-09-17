@@ -1,9 +1,12 @@
 const express = require('express');
 const mysql = require('mysql2/promise');
+const cors = require('cors');
 require('dotenv').config();
 
 const app = express();
 const port = 3001;
+
+app.use(cors());
 
 app.get('/product', async (req, res) => {
     try {
@@ -23,3 +26,4 @@ app.get('/product', async (req, res) => {
 app.listen(port, () => {
   console.log(`Shop app listening at http://localhost:${port}`)
 });
+
