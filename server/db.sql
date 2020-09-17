@@ -1,3 +1,4 @@
+Drop TABLE if exists product;
 CREATE TABLE product (
   id INT NOT NULL,
   name VARCHAR(100) NOT NULL,
@@ -7,16 +8,13 @@ CREATE TABLE product (
   image VARCHAR(100) NOT NULL,
   PRIMARY KEY (id));
 
--- CREATE TABLE basket (
---   user INT NOT NULL,
---   product INT NOT NULL,
---   PRIMARY KEY (user, product),
---   INDEX product_idx (product ASC) VISIBLE,
---   CONSTRAINT product
---     FOREIGN KEY (product)
---     REFERENCES shop.product (id)
---     ON DELETE NO ACTION
---     ON UPDATE NO ACTION);
+Drop TABLE if exists basket;
+CREATE TABLE basket (
+    product_id INT NOT NULL,
+    quantity INT NOT NULL,
+  CONSTRAINT product
+    FOREIGN KEY (product_id)
+    REFERENCES product (id));
 
 INSERT INTO product (
     id,
