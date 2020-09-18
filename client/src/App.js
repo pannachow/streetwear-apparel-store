@@ -11,6 +11,11 @@ import {
 } from "react-router-dom";
 import './App.css';
 
+// async function fetchJson(url) {
+//   const res = await fetch(url);
+//   return await res.json();
+// }
+
 class App extends React.Component {
   constructor(props) {
     super(props);
@@ -24,9 +29,15 @@ class App extends React.Component {
   }
   async componentDidMount() {
     try {
-      const res = await fetch("http://localhost:3001/product");
-      const products = await res.json();
-      this.setState({ stock: products });
+      const res1 = await fetch("http://localhost:3001/product");
+      const res2 = await fetch("http://localhost:3001/basket");
+      const products = await res1.json();
+      const basket = await res2.json();
+      // const [products, basket] = await Promise.all(
+      //   fetchJson("http://localhost:3001/product"),
+      //   fetchJson("http://localhost:3001/basket"),
+      // )
+      this.setState({ stock: products, basket: basket });
     } catch (error) {
       console.log("ERROR in componentDidMount():", error);
     }

@@ -1,27 +1,28 @@
-Drop TABLE if exists product;
+DROP TABLE IF EXISTS product;
 CREATE TABLE product (
   id INT NOT NULL,
   name VARCHAR(100) NOT NULL,
   description VARCHAR(2000) NOT NULL,
   price DOUBLE NOT NULL,
-  color VARCHAR(100) NOT NULL,
+  colour VARCHAR(100) NOT NULL,
   image VARCHAR(100) NOT NULL,
   PRIMARY KEY (id));
 
-Drop TABLE if exists basket;
+DROP TABLE IF EXISTS basket;
 CREATE TABLE basket (
     product_id INT NOT NULL,
     quantity INT NOT NULL,
   CONSTRAINT product
     FOREIGN KEY (product_id)
-    REFERENCES product (id));
+    REFERENCES product (id),
+    PRIMARY KEY (product_id));
 
 INSERT INTO product (
     id,
     name,
     description,
     price,
-    color,
+    colour,
     image
 ) VALUES (
     1,
