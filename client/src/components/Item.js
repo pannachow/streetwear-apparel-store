@@ -25,7 +25,7 @@ class Item extends React.Component {
             <p>£{this.props.showItem.price.toFixed(2)}</p>
             <p>Colour: {this.props.showItem.colour}</p>
             <button 
-              onClick={(e) => this.props.addItem(this.props.showItem.id)} 
+              onClick={(e) => this.props.addItem(this.props.showItem)} 
               className={!this.props.showItem.added ? "" : "active"}
               title={!this.props.showItem.added ? "" : "Click to reset button"}
               >

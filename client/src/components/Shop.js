@@ -11,18 +11,15 @@ class Shop extends React.Component {
     };
   }
 
-  imgClick(id) {
-    let clickedItem = this.props.stock.find((item) => item.id === id);
+  imgClick(item) {
     this.setState({
-      selectedItem: clickedItem,
+      selectedItem: item,
       showAllItems: false
     });
   }
   
-  addItem(id) {
-    let selectedItem = this.props.stock.find((item) => item.id === id);
-    selectedItem['quantity'] = 1;
-    this.props.addToBasket(selectedItem);
+  addItem(item) {
+    this.props.addToBasket(item);
   }
 
   updateState() {
@@ -33,7 +30,7 @@ class Shop extends React.Component {
 
     let items = this.props.stock.map((item) => (
       <div key={item.id}>
-        <img src={item.image} alt={item.title} onClick={(e) => this.imgClick(item.id)}/>
+        <img src={item.image} alt={item.title} onClick={(e) => this.imgClick(item)}/>
         <ul>
           <li>{item.name}</li>
           <li>£{item.price.toFixed(2)}</li>
@@ -46,7 +43,7 @@ class Shop extends React.Component {
           <option value="large">Large</option>
         </select> */}
         <button
-          onClick={(e) => this.addItem(item.id)}
+          onClick={(e) => this.addItem(item)}
           className={!item.added ? "" : "active"}
           title={!item.added ? "" : "Click to reset button"}
           >
@@ -69,7 +66,7 @@ class Shop extends React.Component {
           : <Item
               showItem={this.state.selectedItem}
               updateState={(e) => this.updateState()}
-              addItem={(id) => this.addItem(id)}
+              addItem={(item) => this.addItem(item)}
             />
         }
       </div>

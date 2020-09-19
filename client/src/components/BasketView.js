@@ -6,61 +6,63 @@ class BasketView extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      checkOut: false
+      checkOut: false,
     };
   }
 
   // toggles view for this component, depending on whether checkout has already taken place or not
   checkOut() {
-    this.setState({checkOut: true});
+    this.setState({ checkOut: true });
   }
 
   render() {
-
-    let itemsJsx = this.props.items.map((item) => (
+    const itemsJsx = this.props.items.map((item) => {
+      const product = this.props.stock.find((product) => product.id === item.product_id);
+      return (
         <tr key={item.id}>
-            <td>{item.name}</td>
-            <td>£{item.price.toFixed(2)}</td>
-            <td>{item.colour}</td>
-            <td>{item.quantity}</td>
-            <td>£{(item.quantity * item.price).toFixed(2)}</td>
-            <td>
-                <button onClick={(e) => this.props.onClick(item.id)}>Delete</button>
-            </td>
+          <td>{product.name}</td>
+          <td>£{product.price.toFixed(2)}</td>
+          <td>{product.colour}</td>
+          <td>{item.quantity}</td>
+          <td>£{(item.quantity * product.price).toFixed(2)}</td>
+          <td>
+            <button onClick={(e) => this.props.removeFromBasket(product)}>Delete</button>
+          </td>
         </tr>
-    ));
+      );
+    });
 
     return (
       <div>
         {
           !this.state.checkOut
-          ?
+            ?
             <div className="BasketView">
               <table className="basket-table">
                 <thead>
                   <tr>
-                      <td>ITEM</td>
-                      <td>PRICE</td>
-                      <td>COLOUR</td>
-                      <td>QUANTITY</td>
-                      <td>TOTAL</td>
-                      <td>REMOVE ITEM</td>
+                    <td>ITEM</td>
+                    <td>PRICE</td>
+                    <td>COLOUR</td>
+                    <td>QUANTITY</td>
+                    <td>TOTAL</td>
+                    <td>REMOVE ITEM</td>
                   </tr>
                 </thead>
                 <tbody>
                   {itemsJsx}
                   <tr>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td className="total"><p>£{this.props.total.toFixed(2)}</p></td>
-                      <td><button onClick={(e) => this.checkOut()}>CHECK OUT</button></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td className="total"><p>£{this.props.total.toFixed(2)}</p></td>
+                    <td><button onClick={(e) => this.checkOut()}>CHECK OUT</button></td>
                   </tr>
                 </tbody>
               </table>
             </div>
-          : <CheckOut total={this.props.total} items={this.props.items} onClick={() => this.props.clearBasket()}/>
+            : <CheckOut total={this.props.total} items={this.props.items} onClick={() => this.props.clearBasket()} />
         }
       </div>
     );

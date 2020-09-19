@@ -16,6 +16,9 @@ import './App.css';
 //   return await res.json();
 // }
 
+const PRODUCT_URL = "http://localhost:3001/product";
+const BASKET_URL = "http://localhost:3001/basket";
+
 class App extends React.Component {
   constructor(props) {
     super(props);
@@ -29,15 +32,18 @@ class App extends React.Component {
   }
   async componentDidMount() {
     try {
-      const res1 = await fetch("http://localhost:3001/product");
-      const res2 = await fetch("http://localhost:3001/basket");
+      const res1 = await fetch(PRODUCT_URL);
+      const res2 = await fetch(BASKET_URL);
       const products = await res1.json();
       const basket = await res2.json();
       // const [products, basket] = await Promise.all(
       //   fetchJson("http://localhost:3001/product"),
       //   fetchJson("http://localhost:3001/basket"),
       // )
-      this.setState({ stock: products, basket: basket });
+      this.setState({
+        stock: products,
+        // basket: basket,
+      });
     } catch (error) {
       console.log("ERROR in componentDidMount():", error);
     }
@@ -45,86 +51,84 @@ class App extends React.Component {
 
   // METHODS
 
-  //itemAdded method is how the 'add to basket' button state is toggled in shop and item view
-  //it searches the existing stock array to update the selected item's 'added' true/false value
-  itemAdded(item) {
-    let updatedStock = this.state.stock;
-    let itemIndex = updatedStock.findIndex ((i) => i.id === item.id);
-    updatedStock[itemIndex]['added'] = !updatedStock[itemIndex]['added'];
-    this.setState({stock: updatedStock});
-  }
-
   //addToBasket method called in shop and item view
-  addToBasket(item) {
-    // first checks to toggle the 'add to basket' button text
-    if (item['added']) {
-      this.itemAdded(item);
-      return;
-      // this returns and exits the method; essentially returning the button to default value if clicked on twice
+  async addToBasket(product) {
+    // POST or PUT
+    let item = this.state.basket.find(item => item.product_id === product.id);
+    if (item) {
+      item.quantity++;
+      await fetch(BASKET_URL, {
+        method: "PUT",
+        body: JSON.stringify(item)
+      });
+    } else {
+      item = {
+        product_id: product.id,
+        quantity: 1
+      };
+      this.state.basket.push(item);
+      await fetch(BASKET_URL, {
+        method: "POST",
+        body: JSON.stringify(item)
+      });
     }
-    if (!item['added']) {
-      // if item's added property is false, change it true, updates button text to 'item added!'
-      this.itemAdded(item);
-    }
-    // resets basket view message, if order has already been placed
-    if (this.state.orderPlaced) {
-      this.setState({orderPlaced: false});
-    }
+
     // updates current basket total
     let sum = this.state.total;
-    sum += item['price'];
+    sum += product.price;
     // updates current basket quantity
     let itemCount = this.state.basketItems;
     itemCount++;
-    // if basket already includes the item, update total & quantity
-    if (this.state.basket.includes(item)) {
-      item['quantity']++;
-      this.setState({
-        total: sum,
-        basketItems: itemCount
-      });
-    // if item not in basket, add item, update total & quantity
-    } else {
-      this.setState({
-        basket: [...this.state.basket, item],
-        total: sum,
-        basketItems: itemCount
-      });
-    }
+
+    this.setState({
+      basket: [...this.state.basket],
+      total: sum,
+      basketItems: itemCount,
+      // resets basket view message, if order has already been placed
+      orderPlaced: false,
+    });
   }
 
   // removeFromBasket called in basketView
-  removeFromBasket(selectedItem) {
-    // first checks to toggle the 'add to basket' button text
-    if (selectedItem['added']) {
-      this.itemAdded(selectedItem);
+  async removeFromBasket(product) {
+    const i = this.state.basket.findIndex(item => item.product_id === product.id);
+    const item = this.state.basket[i];
+    if (item) {
+      item.quantity--;
+      if (item.quantity === 0) {
+        this.state.basket.splice(i, 1);
+        await fetch(BASKET_URL, {
+          method: "DELETE",
+          body: JSON.stringify(item)
+        });
+      } else {
+        await fetch(BASKET_URL, {
+          method: "PUT",
+          body: JSON.stringify(item)
+        });
+      }
     }
-    let itemIndex = this.state.basket.findIndex (item => item.id === selectedItem.id);
-    let updatedBasket = [...this.state.basket];
-    let removedItem = this.state.basket[itemIndex];
+    // updates current basket total
     let sum = this.state.total;
+    sum -= product.price;
     // updates current basket quantity
     let itemCount = this.state.basketItems;
     itemCount--;
-    // updates current basket total
-    sum -= removedItem['price'];
-    // if there is more than 1 of the same item in basket, reduce quantity of that item by 1
-    if (removedItem['quantity'] > 1) {
-      removedItem['quantity']--;
-      updatedBasket.splice(itemIndex, 1, removedItem)
-    } else {
-      // if only 1 of the item in cart, delete it and update basket
-      updatedBasket.splice(itemIndex, 1);
-    }
     this.setState({
-      basket: updatedBasket,
+      basket: [...this.state.basket],
       total: sum,
       basketItems: itemCount
     });
   }
 
   // clearBasket method called in checkOut view
-  clearBasket() {
+  async clearBasket() {
+    for (let clearItem of this.state.basket) {
+      await fetch(BASKET_URL, {
+        method: "DELETE",
+        body: JSON.stringify(clearItem)
+      });
+    }
     this.setState({
       basket: [],
       basketItems: 0,
@@ -169,9 +173,10 @@ class App extends React.Component {
                 <About/>
               </Route>
               <Route path="/basket">
-                <Basket 
+                <Basket
+                  stock={this.state.stock}
                   items={this.state.basket}
-                  removeFromBasket={item => this.removeFromBasket(item)}
+                  removeFromBasket={product => this.removeFromBasket(product)}
                   clearBasket={(e) => this.clearBasket()}
                   total={this.state.total}
                   orderStatus={this.state.orderPlaced}
