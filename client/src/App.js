@@ -42,7 +42,7 @@ class App extends React.Component {
       // )
       this.setState({
         stock: products,
-        // basket: basket,
+        basket: basket,
       });
     } catch (error) {
       console.log("ERROR in componentDidMount():", error);
@@ -59,6 +59,7 @@ class App extends React.Component {
       item.quantity++;
       await fetch(BASKET_URL, {
         method: "PUT",
+        headers: { "Content-Type": "application/json" },
         body: JSON.stringify(item)
       });
     } else {
@@ -69,6 +70,7 @@ class App extends React.Component {
       this.state.basket.push(item);
       await fetch(BASKET_URL, {
         method: "POST",
+        headers: { "Content-Type": "application/json" },
         body: JSON.stringify(item)
       });
     }
@@ -99,11 +101,13 @@ class App extends React.Component {
         this.state.basket.splice(i, 1);
         await fetch(BASKET_URL, {
           method: "DELETE",
+          headers: { "Content-Type": "application/json" },
           body: JSON.stringify(item)
         });
       } else {
         await fetch(BASKET_URL, {
           method: "PUT",
+          headers: { "Content-Type": "application/json" },
           body: JSON.stringify(item)
         });
       }
@@ -126,6 +130,7 @@ class App extends React.Component {
     for (let clearItem of this.state.basket) {
       await fetch(BASKET_URL, {
         method: "DELETE",
+        headers: { "Content-Type": "application/json" },
         body: JSON.stringify(clearItem)
       });
     }
@@ -141,52 +146,52 @@ class App extends React.Component {
 
     return (
       <div className="App">
-          <Router>
-            <nav>
-              <div className="nav-grid">
-                <h1>G<span className="goof">oo</span>f Cr<span className="goof">ü</span></h1>
-                <div>
-                  <span style={{fontSize: "1.6em"}}>&#8618; </span>
-                  <NavLink exact to="/" className="link" activeClassName="active">Home</NavLink> /&nbsp;
+        <Router>
+          <nav>
+            <div className="nav-grid">
+              <h1>G<span className="goof">oo</span>f Cr<span className="goof">ü</span></h1>
+              <div>
+                <span style={{ fontSize: "1.6em" }}>&#8618; </span>
+                <NavLink exact to="/" className="link" activeClassName="active">Home</NavLink> /&nbsp;
                   <NavLink to="/shop" className="link" activeClassName="active">Shop</NavLink> /&nbsp;
                   <NavLink to="/about" className="link" activeClassName="active">About</NavLink> /&nbsp;
                   {
-                    this.state.basketItems === 0
+                  this.state.basketItems === 0
                     ? <NavLink to="/basket" className="link" activeClassName="active">Basket</NavLink>
                     : <NavLink to="/basket" className="link" activeClassName="active">Basket ({this.state.basketItems})</NavLink>
-                  }
-                </div>
+                }
               </div>
-            </nav>
-            <img src="/images/hero.jpg" alt="skateboarder in Dubrovnik" className="hero"/>
-            <Switch>
-              <Route exact path="/">
-                <Home/>
-              </Route>
-              <Route path="/shop">
-                <Shop
-                  stock={this.state.stock}
-                  addToBasket={item => this.addToBasket(item)}
-                />
-              </Route>
-              <Route path="/about">
-                <About/>
-              </Route>
-              <Route path="/basket">
-                <Basket
-                  stock={this.state.stock}
-                  items={this.state.basket}
-                  removeFromBasket={product => this.removeFromBasket(product)}
-                  clearBasket={(e) => this.clearBasket()}
-                  total={this.state.total}
-                  orderStatus={this.state.orderPlaced}
-                />
-              </Route>
-            </Switch>
-          </Router>
-          <hr/>
-          <div className="footer">
-            © GOOF CRÜ 2020
+            </div>
+          </nav>
+          <img src="/images/hero.jpg" alt="skateboarder in Dubrovnik" className="hero" />
+          <Switch>
+            <Route exact path="/">
+              <Home />
+            </Route>
+            <Route path="/shop">
+              <Shop
+                stock={this.state.stock}
+                addToBasket={item => this.addToBasket(item)}
+              />
+            </Route>
+            <Route path="/about">
+              <About />
+            </Route>
+            <Route path="/basket">
+              <Basket
+                stock={this.state.stock}
+                items={this.state.basket}
+                removeFromBasket={product => this.removeFromBasket(product)}
+                clearBasket={(e) => this.clearBasket()}
+                total={this.state.total}
+                orderStatus={this.state.orderPlaced}
+              />
+            </Route>
+          </Switch>
+        </Router>
+        <hr />
+        <div className="footer">
+          © GOOF CRÜ 2020
           </div>
       </div>
     );
