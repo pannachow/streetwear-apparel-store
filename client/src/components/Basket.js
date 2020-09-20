@@ -13,9 +13,9 @@ class Basket extends React.Component {
           this.props.items.length > 0
           // if there are items in basket, show the basket
           ? <BasketView
-              stock={this.props.stock}
+              products={this.props.products}
               items={this.props.items}
-              total={this.props.total}
+              totalPrice={this.props.totalPrice}
               clearBasket={(e) => this.props.clearBasket()}
               removeFromBasket={(product) => this.props.removeFromBasket(product)}
             />

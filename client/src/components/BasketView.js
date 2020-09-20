@@ -17,7 +17,7 @@ class BasketView extends React.Component {
 
   render() {
     const itemsJsx = this.props.items.map((item) => {
-      const product = this.props.stock.find((product) => product.id === item.product_id);
+      const product = this.props.products.find((product) => product.id === item.product_id);
       return (
         <tr key={item.id}>
           <td>{product.name}</td>
@@ -56,13 +56,13 @@ class BasketView extends React.Component {
                     <td></td>
                     <td></td>
                     <td></td>
-                    <td className="total"><p>£{this.props.total.toFixed(2)}</p></td>
+                    <td className="total"><p>£{this.props.totalPrice.toFixed(2)}</p></td>
                     <td><button onClick={(e) => this.checkOut()}>CHECK OUT</button></td>
                   </tr>
                 </tbody>
               </table>
             </div>
-            : <CheckOut total={this.props.total} items={this.props.items} onClick={() => this.props.clearBasket()} />
+            : <CheckOut totalPrice={this.props.totalPrice} items={this.props.items} onClick={() => this.props.clearBasket()} />
         }
       </div>
     );

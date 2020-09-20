@@ -28,7 +28,7 @@ class Shop extends React.Component {
 
   render() {
 
-    let items = this.props.stock.map((item) => (
+    let items = this.props.products.map((item) => (
       <div key={item.id}>
         <img src={item.image} alt={item.title} onClick={(e) => this.imgClick(item)}/>
         <ul>

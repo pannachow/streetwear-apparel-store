@@ -23,10 +23,10 @@ class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      stock: [],
+      products: [],
       basket: [],
-      basketItems: 0,
-      total: 0,
+      totalQuantity: 0,
+      totalPrice: 0,
       orderPlaced: false
     };
   }
@@ -40,9 +40,18 @@ class App extends React.Component {
       //   fetchJson("http://localhost:3001/product"),
       //   fetchJson("http://localhost:3001/basket"),
       // )
+      let totalQuantity = 0;
+      let totalPrice = 0;
+      for (let item of basket) {
+        totalQuantity += item.quantity;
+        const product = products.find((product) => product.id === item.product_id);
+        totalPrice += item.quantity * product.price;
+      }
       this.setState({
-        stock: products,
+        products: products,
         basket: basket,
+        totalQuantity,
+        totalPrice
       });
     } catch (error) {
       console.log("ERROR in componentDidMount():", error);
@@ -75,17 +84,17 @@ class App extends React.Component {
       });
     }
 
-    // updates current basket total
-    let sum = this.state.total;
+    // updates current basket total price
+    let sum = this.state.totalPrice;
     sum += product.price;
     // updates current basket quantity
-    let itemCount = this.state.basketItems;
+    let itemCount = this.state.totalQuantity;
     itemCount++;
 
     this.setState({
       basket: [...this.state.basket],
-      total: sum,
-      basketItems: itemCount,
+      totalPrice: sum,
+      totalQuantity: itemCount,
       // resets basket view message, if order has already been placed
       orderPlaced: false,
     });
@@ -112,16 +121,16 @@ class App extends React.Component {
         });
       }
     }
-    // updates current basket total
-    let sum = this.state.total;
+    // updates current basket total price
+    let sum = this.state.totalPrice;
     sum -= product.price;
     // updates current basket quantity
-    let itemCount = this.state.basketItems;
+    let itemCount = this.state.totalQuantity;
     itemCount--;
     this.setState({
       basket: [...this.state.basket],
-      total: sum,
-      basketItems: itemCount
+      totalPrice: sum,
+      totalQuantity: itemCount
     });
   }
 
@@ -136,8 +145,8 @@ class App extends React.Component {
     }
     this.setState({
       basket: [],
-      basketItems: 0,
-      total: 0,
+      totalQuantity: 0,
+      totalPrice: 0,
       orderPlaced: true
     });
   }
@@ -156,9 +165,9 @@ class App extends React.Component {
                   <NavLink to="/shop" className="link" activeClassName="active">Shop</NavLink> /&nbsp;
                   <NavLink to="/about" className="link" activeClassName="active">About</NavLink> /&nbsp;
                   {
-                  this.state.basketItems === 0
+                  this.state.totalQuantity === 0
                     ? <NavLink to="/basket" className="link" activeClassName="active">Basket</NavLink>
-                    : <NavLink to="/basket" className="link" activeClassName="active">Basket ({this.state.basketItems})</NavLink>
+                    : <NavLink to="/basket" className="link" activeClassName="active">Basket ({this.state.totalQuantity})</NavLink>
                 }
               </div>
             </div>
@@ -170,7 +179,7 @@ class App extends React.Component {
             </Route>
             <Route path="/shop">
               <Shop
-                stock={this.state.stock}
+                products={this.state.products}
                 addToBasket={item => this.addToBasket(item)}
               />
             </Route>
@@ -179,11 +188,11 @@ class App extends React.Component {
             </Route>
             <Route path="/basket">
               <Basket
-                stock={this.state.stock}
+                products={this.state.products}
                 items={this.state.basket}
                 removeFromBasket={product => this.removeFromBasket(product)}
                 clearBasket={(e) => this.clearBasket()}
-                total={this.state.total}
+                totalPrice={this.state.totalPrice}
                 orderStatus={this.state.orderPlaced}
               />
             </Route>

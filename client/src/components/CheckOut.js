@@ -13,8 +13,8 @@ class CheckOut extends React.Component {
           country: '',
           postcode: '',
           items: this.props.items,
-          // total + 5 for postage
-          total: this.props.total + 5
+          // totalPrice + 5 for postage
+          totalPrice: this.props.totalPrice + 5
         };
       }
 
@@ -99,7 +99,7 @@ class CheckOut extends React.Component {
                         value={this.state.postcode}
                         onChange={(e) => this.handleInputChange(e)}
                     />
-                    <span className="formSpan"><b>TOTAL: £{this.state.total} (inc. £5 postage)</b></span>
+                    <span className="formSpan"><b>TOTAL: £{this.state.totalPrice} (inc. £5 postage)</b></span>
                     <button className="formSpan" type="submit">PLACE ORDER</button>
                 </form>
             </div>
