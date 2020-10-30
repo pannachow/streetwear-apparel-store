@@ -1,16 +1,44 @@
-# mvp-project-1
-A simple online shop interface for an independent streetwear apparel brand
+# streetwear-apparel-store
 
-## How to:
-To run the app on browser, from the main project directory, cd into client and npm start
+A simple online shop interface for an independent streetwear apparel brand.
 
-## What the app does
+![Product catalog](docs/streetwear_1.jpg)
+![Checkout](docs/streetwear_2.jpg)
+
+## Getting Started:
+
+Setup the database:
+
+```sh
+cd server
+mysql -u root < db.sql
+```
+
+Start the server:
+
+```sh
+cd server
+npm install
+npm start
+```
+
+Start the client:
+
+```sh
+cd client
+npm install
+npm start
+```
+
+## What The App Does
+
 * Shows all items
 * Gives detail on individual items on hover/click (price/description/colour)
 * Allows user to add item(s) to cart
 * Allows users to remove item(s) from cart
 
-### Feature expansion
+### Feature Extension
+
 * Add product image to basket view
 * Allow users to save items to cart to retrieve later
 * Store inventory on back end database
@@ -22,7 +50,9 @@ To run the app on browser, from the main project directory, cd into client and n
 * Submit form to go to a nominated email address?
 
 ### Userflow
-![Sitemap](images/sitemap.jpg)
+
+![Sitemap](docs/sitemap.jpg)
+
 * Nav bar on top of screen (shop/cart/about)
 * Shop page displays all items (likely 8 max)
 * On clicking an item, dedicated page will show product name, description, price, size selector(?), 'add to basket' button + back to shop
@@ -32,22 +62,25 @@ To run the app on browser, from the main project directory, cd into client and n
 * Design for web & for mobile view
 
 ### Data
+
 * Stored initially as array of objects in separate JS file
 * Stock item to include:
-- ID number
-- name/title
-- description
-- price
-- colour
-- size(s)
-- image link
+    - ID number
+    - name/title
+    - description
+    - price
+    - colour
+    - size(s)
+    - image link
 
-## Backend not being implemented at this stage, though may try to introduce later
+![Database schema](docs/schema.jpg)
 
-### Database schema
-![Database schema](images/schema.jpg)
 * 2x tables; 1x for stock, 1x for storing quantities of stock by size
 
-### API routes (Not yet applicable)
-* GET api/stock : returns all inventory objects
-* GET api/stock/:id : returns item by ID number (when clicking on image in shop)
+### API routes
+
+* GET /product : returns all products
+* GET /basket : returns all items in the shopping basket
+* POST /basket : adds a new item to the shopping basket
+* PUT /basket : updates an item in the shopping basket
+* DELETE /basket : removes an item from the shopping basket
