@@ -1,4 +1,6 @@
+DROP TABLE IF EXISTS basket;
 DROP TABLE IF EXISTS product;
+
 CREATE TABLE product (
   id INT NOT NULL,
   name VARCHAR(100) NOT NULL,
@@ -8,7 +10,6 @@ CREATE TABLE product (
   image VARCHAR(100) NOT NULL,
   PRIMARY KEY (id));
 
-DROP TABLE IF EXISTS basket;
 CREATE TABLE basket (
     product_id INT NOT NULL,
     quantity INT NOT NULL,
