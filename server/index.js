@@ -15,7 +15,7 @@ async function execute(sql, values) {
         host: process.env.DB_HOST,
         user: process.env.DB_USER,
         password: process.env.DB_PASSWORD,
-        database: 'shop'
+        database: process.env.DB_NAME || 'shop',
     });
     const res = await conn.execute(sql, values);
     // we got max number of connections exceeded error without closing
