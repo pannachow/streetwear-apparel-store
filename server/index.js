@@ -4,8 +4,9 @@ const mysql = require('mysql2/promise');
 const cors = require('cors');
 require('dotenv').config();
 
+const port = parseInt(process.env.PORT || '3001');
+
 const app = express();
-const port = 3001;
 
 app.use(cors());
 app.use(bodyParser.json());
