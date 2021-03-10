@@ -194,7 +194,7 @@ class App extends React.Component {
             </div>
           </nav>
           <img
-            src="/images/hero.jpg"
+            src="images/hero.jpg"
             alt="skateboarder in Dubrovnik"
             className="hero"
           />

@@ -39,7 +39,7 @@ class About extends React.Component {
         <h3>About</h3>
         <hr/>
         <div className="grid">
-          <img src="/images/goofcru.gif" alt="Sundown skateboard gif"/>
+          <img src="images/goofcru.gif" alt="Sundown skateboard gif"/>
           <div>
             <h3>
               "Goof Crü is an independant streetwear brand, founded in 2020, in London. We produce genderless clothing and accessories sourced 
