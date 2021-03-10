@@ -30,10 +30,10 @@ class App extends React.Component {
   }
   async componentDidMount() {
     try {
-      const [products, basket] = await Promise.all(
+      const [products, basket] = await Promise.all([
         fetchApi("/product").then((res) => res.json()),
-        fetchApi("/basket").then((res) => res.json())
-      );
+        fetchApi("/basket").then((res) => res.json()),
+      ]);
       let totalQuantity = 0;
       let totalPrice = 0;
       for (const item of basket) {
@@ -81,11 +81,9 @@ class App extends React.Component {
     }
 
     // updates current basket total price
-    let sum = this.state.totalPrice;
-    sum += product.price;
+    const sum = this.state.totalPrice + product.price;
     // updates current basket quantity
-    let itemCount = this.state.totalQuantity;
-    itemCount++;
+    const itemCount = this.state.totalQuantity + 1;
 
     this.setState({
       basket: [...this.state.basket],
@@ -134,7 +132,7 @@ class App extends React.Component {
 
   // clearBasket method called in checkOut view
   async clearBasket() {
-    for (let clearItem of this.state.basket) {
+    for (const clearItem of this.state.basket) {
       await fetchApi("/basket", {
         method: "DELETE",
         headers: { "Content-Type": "application/json" },
