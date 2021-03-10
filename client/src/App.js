@@ -13,8 +13,8 @@ import "./App.css";
 
 const BASE_URL = process.env.REACT_APP_API_BASE_URL || "http://localhost:3001";
 
-function fetchApi(url) {
-  return fetch(BASE_URL + url);
+function fetchApi(url, options) {
+  return fetch(BASE_URL + url, options);
 }
 
 class App extends React.Component {
